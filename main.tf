@@ -65,3 +65,14 @@ resource "grafana_dashboard" "syno_nginx_logs" {
     )
   )
 }
+
+resource "grafana_dashboard" "k8s_cluster" {
+  config_json = jsonencode(
+    yamldecode(
+      templatefile("dashboards/k8s_cluster.yaml", {
+        main_datasource = grafana_data_source.prometheus.uid
+        k8s_datasource  = grafana_data_source.k8s_prom.uid
+      })
+    )
+  )
+}
