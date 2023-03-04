@@ -45,6 +45,17 @@ resource "grafana_dashboard" "k8s_node_exporter" {
   )
 }
 
+resource "grafana_dashboard" "non_k8s_node_exporter" {
+  config_json = jsonencode(
+    yamldecode(
+      templatefile("dashboards/other_node_exporter.yaml", {
+        main_datasource = grafana_data_source.prometheus.uid
+        swap_webhook    = var.swap_webhook
+      })
+    )
+  )
+}
+
 resource "grafana_dashboard" "magic_smoke" {
   config_json = jsonencode(
     yamldecode(
