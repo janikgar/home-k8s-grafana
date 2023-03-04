@@ -3,7 +3,7 @@ annotations:
     - builtIn: 1
       datasource:
         type: prometheus
-        uid: ${datasource}
+        uid: ${main_datasource}
       enable: true
       hide: true  
       iconColor: rgba(0, 211, 255, 1)
@@ -16,7 +16,7 @@ annotations:
       type: dashboard
     - datasource:
         type: prometheus
-        uid: ${datasource}
+        uid: ${main_datasource}
       enable: true
       expr: increase(scheduler_schedule_attempts_total{}[5m])
       hide: false
@@ -33,7 +33,7 @@ liveNow: false
 panels:
   - datasource:
       type: prometheus
-      uid: ${datasource}
+      uid: ${main_datasource}
     fieldConfig:
       defaults:
         color:
@@ -90,7 +90,7 @@ panels:
     targets:
       - datasource:
           type: prometheus
-          uid: ${datasource}
+          uid: ${main_datasource}
         exemplar: true
         expr: kube_statefulset_status_replicas_ready{} / kube_statefulset_status_replicas{}
         interval: ''
@@ -101,7 +101,7 @@ panels:
     type: timeseries
   - datasource:
       type: prometheus
-      uid: ${datasource}
+      uid: ${main_datasource}
     fieldConfig:
       defaults:
         color:
@@ -140,7 +140,7 @@ panels:
     targets:
       - datasource:
           type: prometheus
-          uid: ${datasource}
+          uid: ${main_datasource}
         editorMode: code
         exemplar: true
         expr: kube_statefulset_status_replicas_ready{} / kube_statefulset_status_replicas{}
@@ -153,7 +153,7 @@ panels:
     type: state-timeline
   - datasource:
       type: prometheus
-      uid: ${datasource}
+      uid: ${main_datasource}
     description: ''
     fieldConfig:
       defaults:
@@ -211,7 +211,7 @@ panels:
     targets:
       - datasource:
           type: prometheus
-          uid: ${datasource}
+          uid: ${main_datasource}
         exemplar: true
         expr: kube_deployment_status_replicas_available{} / kube_deployment_status_replicas{}
         interval: ''
@@ -222,7 +222,7 @@ panels:
     type: timeseries
   - datasource:
       type: prometheus
-      uid: ${datasource}
+      uid: ${main_datasource}
     fieldConfig:
       defaults:
         color:
@@ -261,7 +261,7 @@ panels:
     targets:
       - datasource:
           type: prometheus
-          uid: ${datasource}
+          uid: ${main_datasource}
         exemplar: true
         expr: kube_deployment_status_replicas_available{} / kube_deployment_status_replicas{}
         interval: ''
@@ -272,7 +272,7 @@ panels:
     type: state-timeline
   - datasource:
       type: prometheus
-      uid: ${datasource}
+      uid: ${main_datasource}
     description: ''
     fieldConfig:
       defaults:
@@ -329,7 +329,7 @@ panels:
     targets:
       - datasource:
           type: prometheus
-          uid: ${datasource}
+          uid: ${main_datasource}
         exemplar: true
         expr: kube_daemonset_status_current_number_scheduled{} / kube_daemonset_status_desired_number_scheduled{}
         interval: ''

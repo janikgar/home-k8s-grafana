@@ -27,7 +27,7 @@ resource "grafana_dashboard" "health_checks" {
   config_json = jsonencode(
     yamldecode(
       templatefile("dashboards/health_checks.yaml", {
-        datasource = grafana_data_source.k8s_prom.uid
+        main_datasource = grafana_data_source.k8s_prom.uid
       })
     )
   )
