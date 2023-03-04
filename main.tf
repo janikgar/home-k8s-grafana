@@ -23,6 +23,14 @@ resource "grafana_data_source" "loki" {
   url  = "http://192.168.1.28:30002"
 }
 
+resource "grafana_contact_point" "hass" {
+  name = "HASS"
+  webhook {
+    url         = "http://home-assistant.home.lan:8123/api/webhook/external_alert"
+    http_method = "POST"
+  }
+}
+
 resource "grafana_dashboard" "health_checks" {
   config_json = jsonencode(
     yamldecode(
