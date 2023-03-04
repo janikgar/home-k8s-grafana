@@ -1,0 +1,539 @@
+annotations:
+  list:
+    - builtIn: 1
+      datasource:
+        type: datasource
+        uid: grafana
+      enable: true
+      hide: true
+      iconColor: rgba(0, 211, 255, 1)
+      name: Annotations & Alerts
+      target:
+        limit: 100
+        matchAny: false
+        tags: []
+        type: dashboard
+      type: dashboard
+editable: true
+fiscalYearStartMonth: 0
+graphTooltip: 0
+id: 14
+links: []
+liveNow: false
+panels:
+  - collapsed: false
+    gridPos:
+      h: 1
+      w: 24
+      x: 0
+      y: 0
+    id: 14
+    panels: []
+    title: IO/Latency
+    type: row
+  - datasource:
+      type: prometheus
+      uid: ${main_datasource}
+    description: ''
+    fieldConfig:
+      defaults:
+        color:
+          mode: palette-classic
+        custom:
+          axisCenteredZero: false
+          axisColorMode: text
+          axisLabel: ''
+          axisPlacement: auto
+          barAlignment: 0
+          drawStyle: line
+          fillOpacity: 0
+          gradientMode: none
+          hideFrom:
+            legend: false
+            tooltip: false
+            viz: false
+          lineInterpolation: linear
+          lineWidth: 1
+          pointSize: 5
+          scaleDistribution:
+            type: linear
+          showPoints: auto
+          spanNulls: false
+          stacking:
+            group: A
+            mode: none
+          thresholdsStyle:
+            mode: 'off'
+        mappings: []
+        thresholds:
+          mode: absolute
+          steps:
+            - color: green
+              value: null
+            - color: red
+              value: 80
+        unit: Bps
+      overrides: []
+    gridPos:
+      h: 8
+      w: 12
+      x: 0
+      y: 1
+    id: 9
+    options:
+      legend:
+        calcs: []
+        displayMode: list
+        placement: bottom
+        showLegend: true
+      tooltip:
+        mode: single
+        sort: none
+    targets:
+      - datasource:
+          type: prometheus
+          uid: ${main_datasource}
+        exemplar: true
+        expr: sum by (instance) (rate(ifOutOctets{instance!="192.168.1.1"}[$__rate_interval]))
+          * -8
+        interval: ''
+        legendFormat: '{{instance}} out'
+        refId: A
+      - datasource:
+          type: prometheus
+          uid: ${main_datasource}
+        exemplar: true
+        expr: sum by (instance) (rate(ifInOctets{ifName=~"eth.*", instance!="192.168.1.1"}[$__rate_interval]))
+          * 8
+        hide: false
+        interval: ''
+        legendFormat: '{{instance}} in'
+        refId: B
+    title: Ethernet I/O
+    type: timeseries
+  - datasource:
+      type: prometheus
+      uid: ${main_datasource}
+    description: ''
+    fieldConfig:
+      defaults:
+        color:
+          mode: palette-classic
+        custom:
+          axisCenteredZero: false
+          axisColorMode: text
+          axisLabel: ''
+          axisPlacement: auto
+          barAlignment: 0
+          drawStyle: line
+          fillOpacity: 0
+          gradientMode: none
+          hideFrom:
+            legend: false
+            tooltip: false
+            viz: false
+          lineInterpolation: linear
+          lineWidth: 1
+          pointSize: 5
+          scaleDistribution:
+            type: linear
+          showPoints: auto
+          spanNulls: false
+          stacking:
+            group: A
+            mode: none
+          thresholdsStyle:
+            mode: 'off'
+        mappings: []
+        thresholds:
+          mode: absolute
+          steps:
+            - color: green
+              value: null
+            - color: red
+              value: 80
+        unit: Bps
+      overrides: []
+    gridPos:
+      h: 8
+      w: 12
+      x: 12
+      y: 1
+    id: 10
+    options:
+      legend:
+        calcs: []
+        displayMode: list
+        placement: bottom
+        showLegend: true
+      tooltip:
+        mode: single
+        sort: none
+    targets:
+      - datasource:
+          type: prometheus
+          uid: ${main_datasource}
+        exemplar: true
+        expr: sum by (instance) (rate(ifOutOctets{instance="192.168.1.1"}[$__rate_interval]))
+          * -8
+        interval: ''
+        legendFormat: '{{instance}} out'
+        refId: A
+      - datasource:
+          type: prometheus
+          uid: ${main_datasource}
+        exemplar: true
+        expr: sum by (instance) (rate(ifInOctets{instance="192.168.1.1"}[$__rate_interval]))
+          * 8
+        hide: false
+        interval: ''
+        legendFormat: '{{instance}} in'
+        refId: B
+    title: Router I/O
+    type: timeseries
+  - datasource:
+      type: prometheus
+      uid: ${main_datasource}
+    description: ''
+    fieldConfig:
+      defaults:
+        color:
+          mode: palette-classic
+        custom:
+          axisCenteredZero: false
+          axisColorMode: text
+          axisLabel: ''
+          axisPlacement: auto
+          barAlignment: 0
+          drawStyle: line
+          fillOpacity: 0
+          gradientMode: none
+          hideFrom:
+            legend: false
+            tooltip: false
+            viz: false
+          lineInterpolation: linear
+          lineWidth: 1
+          pointSize: 5
+          scaleDistribution:
+            type: linear
+          showPoints: auto
+          spanNulls: false
+          stacking:
+            group: A
+            mode: none
+          thresholdsStyle:
+            mode: 'off'
+        mappings: []
+        min: 0
+        thresholds:
+          mode: absolute
+          steps:
+            - color: green
+              value: null
+            - color: red
+              value: 80
+        unit: s
+      overrides: []
+    gridPos:
+      h: 8
+      w: 12
+      x: 0
+      y: 9
+    id: 12
+    options:
+      legend:
+        calcs: []
+        displayMode: list
+        placement: bottom
+        showLegend: true
+      tooltip:
+        mode: single
+        sort: none
+    targets:
+      - datasource:
+          type: prometheus
+          uid: ${main_datasource}
+        exemplar: true
+        expr: probe_duration_seconds{job="http_ping"}
+        interval: ''
+        legendFormat: '{{instance}}'
+        refId: A
+    title: External Latency
+    type: timeseries
+  - collapsed: false
+    datasource:
+      type: prometheus
+      uid: ${main_datasource}
+    gridPos:
+      h: 1
+      w: 24
+      x: 0
+      y: 17
+    id: 7
+    panels: []
+    targets:
+      - datasource:
+          type: prometheus
+          uid: ${main_datasource}
+        refId: A
+    title: DNS
+    type: row
+  - datasource:
+      type: prometheus
+      uid: ${main_datasource}
+    description: ''
+    fieldConfig:
+      defaults:
+        color:
+          mode: thresholds
+        custom:
+          fillOpacity: 70
+          lineWidth: 0
+          spanNulls: false
+        mappings: []
+        thresholds:
+          mode: absolute
+          steps:
+            - color: red
+              value: null
+            - color: green
+              value: 1
+      overrides: []
+    gridPos:
+      h: 8
+      w: 12
+      x: 0
+      y: 18
+    id: 2
+    options:
+      alignValue: left
+      legend:
+        displayMode: list
+        placement: bottom
+        showLegend: true
+      mergeValues: true
+      rowHeight: 0.9
+      showValue: auto
+      tooltip:
+        mode: single
+        sort: none
+    targets:
+      - datasource:
+          type: prometheus
+          uid: ${main_datasource}
+        exemplar: true
+        expr: probe_success{job="local_dns"}
+        interval: ''
+        intervalFactor: 10
+        legendFormat: '{{instance}}'
+        refId: A
+    title: Local DNS Resolution Success
+    type: state-timeline
+  - datasource:
+      type: prometheus
+      uid: ${main_datasource}
+    description: ''
+    fieldConfig:
+      defaults:
+        color:
+          mode: thresholds
+        custom:
+          fillOpacity: 70
+          lineWidth: 0
+          spanNulls: false
+        mappings: []
+        thresholds:
+          mode: absolute
+          steps:
+            - color: red
+              value: null
+            - color: green
+              value: 1
+      overrides: []
+    gridPos:
+      h: 8
+      w: 12
+      x: 12
+      y: 18
+    id: 3
+    options:
+      alignValue: left
+      legend:
+        displayMode: list
+        placement: bottom
+        showLegend: true
+      mergeValues: true
+      rowHeight: 0.9
+      showValue: auto
+      tooltip:
+        mode: single
+        sort: none
+    targets:
+      - datasource:
+          type: prometheus
+          uid: ${main_datasource}
+        exemplar: true
+        expr: probe_success{job="remote_dns"}
+        interval: ''
+        intervalFactor: 10
+        legendFormat: '{{instance}}'
+        refId: A
+    title: Remote DNS Resolution Latency
+    type: state-timeline
+  - datasource:
+      type: prometheus
+      uid: ${main_datasource}
+    description: ''
+    fieldConfig:
+      defaults:
+        color:
+          mode: palette-classic
+        custom:
+          axisCenteredZero: false
+          axisColorMode: text
+          axisLabel: ''
+          axisPlacement: auto
+          barAlignment: 0
+          drawStyle: line
+          fillOpacity: 0
+          gradientMode: none
+          hideFrom:
+            legend: false
+            tooltip: false
+            viz: false
+          lineInterpolation: linear
+          lineWidth: 1
+          pointSize: 5
+          scaleDistribution:
+            type: linear
+          showPoints: auto
+          spanNulls: false
+          stacking:
+            group: A
+            mode: none
+          thresholdsStyle:
+            mode: 'off'
+        mappings: []
+        thresholds:
+          mode: absolute
+          steps:
+            - color: red
+              value: null
+            - color: green
+              value: 1
+        unit: s
+      overrides: []
+    gridPos:
+      h: 8
+      w: 12
+      x: 0
+      y: 26
+    id: 4
+    options:
+      legend:
+        calcs: []
+        displayMode: list
+        placement: bottom
+        showLegend: true
+      tooltip:
+        mode: single
+        sort: none
+    targets:
+      - datasource:
+          type: prometheus
+          uid: ${main_datasource}
+        editorMode: code
+        exemplar: true
+        expr: sum(probe_dns_duration_seconds{job="local_dns"}) by (instance)
+        interval: ''
+        intervalFactor: 1
+        legendFormat: '{{instance}}: {{phase}}'
+        range: true
+        refId: A
+    title: Local DNS Resolution Latency
+    type: timeseries
+  - datasource:
+      type: prometheus
+      uid: ${main_datasource}
+    description: ''
+    fieldConfig:
+      defaults:
+        color:
+          mode: palette-classic
+        custom:
+          axisCenteredZero: false
+          axisColorMode: text
+          axisLabel: ''
+          axisPlacement: auto
+          barAlignment: 0
+          drawStyle: line
+          fillOpacity: 0
+          gradientMode: none
+          hideFrom:
+            legend: false
+            tooltip: false
+            viz: false
+          lineInterpolation: linear
+          lineWidth: 1
+          pointSize: 5
+          scaleDistribution:
+            type: linear
+          showPoints: auto
+          spanNulls: false
+          stacking:
+            group: A
+            mode: none
+          thresholdsStyle:
+            mode: 'off'
+        mappings: []
+        thresholds:
+          mode: absolute
+          steps:
+            - color: red
+              value: null
+            - color: green
+              value: 1
+        unit: s
+      overrides: []
+    gridPos:
+      h: 8
+      w: 12
+      x: 12
+      y: 26
+    id: 5
+    options:
+      legend:
+        calcs: []
+        displayMode: list
+        placement: bottom
+        showLegend: true
+      tooltip:
+        mode: single
+        sort: none
+    targets:
+      - datasource:
+          type: prometheus
+          uid: ${main_datasource}
+        editorMode: code
+        exemplar: true
+        expr: sum(probe_dns_duration_seconds{job="local_dns"}) by (instance)
+        interval: ''
+        intervalFactor: 1
+        legendFormat: '{{instance}}: {{phase}}'
+        range: true
+        refId: A
+    title: Remote DNS Resolution Latency
+    type: timeseries
+refresh: 30s
+style: dark
+tags: []
+templating:
+  list: []
+time:
+  from: now-1h
+  to: now
+timepicker: {}
+timezone: ''
+title: Magic Smoke
+weekStart: ''
