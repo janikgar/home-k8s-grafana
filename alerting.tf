@@ -34,7 +34,7 @@ resource "grafana_contact_point" "n8n_synapse" {
 resource "grafana_notification_policy" "root" {
   group_by      = ["alert"]
   # contact_point = grafana_contact_point.hass.name
-  contact_point = grafana_contact_point.synapse.name
+  contact_point = grafana_contact_point.n8n_synapse.name
 
   group_wait      = "30s"
   group_interval  = "5m"
