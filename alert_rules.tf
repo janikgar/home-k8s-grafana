@@ -11,7 +11,7 @@ resource "grafana_rule_group" "swap" {
   rule {
     name           = "Swap Usage High"
     for            = "5m"
-    condition      = "B"
+    condition      = "C"
     no_data_state  = "NoData"
     exec_err_state = "Alerting"
     labels = {
@@ -111,15 +111,6 @@ resource "grafana_rule_group" "swap" {
             }
           }
         ]
-        # <<EOF
-        #   [{"evaluator": {
-        #       "params": [
-        #         0.2
-        #       ],
-        #       "type": "gt"
-        #     }
-        #   }]
-        #   EOF
       })
     }
   }
