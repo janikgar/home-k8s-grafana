@@ -15,9 +15,26 @@ resource "grafana_contact_point" "hass_no_resolve" {
   }
 }
 
+resource "grafana_contact_point" "synapse" {
+  name = "Synapse"
+  webhook {
+    url         = "https://mtx-webhook.home.lan?formatter=grafana&key=${var.matrix_webhook_key}&room_id=${var.matrix_room_id}"
+    http_method = "POST"
+  }
+}
+
+resource "grafana_contact_point" "n8n_synapse" {
+  name = "N8n-Synapse"
+  webhook {
+    url         = "https://n8n.home.lan/webhook/a0650a8c-c8a1-4b6a-bead-6a5e8d78f431"
+    http_method = "POST"
+  }
+}
+
 resource "grafana_notification_policy" "root" {
   group_by      = ["alert"]
-  contact_point = grafana_contact_point.hass.name
+  # contact_point = grafana_contact_point.hass.name
+  contact_point = grafana_contact_point.synapse.name
 
   group_wait      = "30s"
   group_interval  = "5m"

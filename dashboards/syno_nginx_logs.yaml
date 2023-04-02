@@ -36,62 +36,10 @@ annotations:
 editable: true
 fiscalYearStartMonth: 0
 graphTooltip: 0
+id: 10
 links: []
 liveNow: false
 panels:
-  - datasource:
-      type: loki
-      uid: ${loki_datasource}
-    fieldConfig:
-      defaults:
-        color:
-          mode: thresholds
-        links:
-          - targetBlank: true
-            title: IP Address Detail
-            url: https://grafana.home.lan/explore?orgId&left={"datasource":"Loki","queries":[{"refId":"A","expr":"{filename%3D\"%2Fvar%2Flog%2Fnginx%2Faccess.log\",job=\"varstarlogs\"}
-              != \"Loki\" |= ip(\"$${__field.labels.client}\")"}],"range":{"from":"$${__from}","to":"$${__to}"}}
-        mappings: []
-        thresholds:
-          mode: absolute
-          steps:
-            - color: green
-              value: null
-            - color: '#EAB839'
-              value: 2
-            - color: red
-              value: 5
-      overrides: []
-    gridPos:
-      h: 8
-      w: 12
-      x: 12
-      y: 0
-    id: 7
-    options:
-      displayMode: gradient
-      minVizHeight: 10
-      minVizWidth: 0
-      orientation: horizontal
-      reduceOptions:
-        calcs:
-          - max
-        fields: ''
-        values: false
-      showUnfilled: true
-      text: {}
-    pluginVersion: 9.2.5
-    targets:
-      - datasource:
-          type: loki
-          uid: ${loki_datasource}
-        expr: sum by (client) (count_over_time({filename="/var/log/nginx/access.log"}
-          != ip("192.168.1.1/16") != ip("127.0.0.1") != "SYSTEM" | pattern `<client>
-          - <_> <_> "<request>" <code> <size> "-" "<user_agent>" "-"`[5m]))
-        legendFormat: '{{client}}'
-        refId: A
-    title: Query Access from non-local
-    type: bargauge
   - datasource:
       type: loki
       uid: ${loki_datasource}
@@ -136,9 +84,10 @@ panels:
       overrides: []
     gridPos:
       h: 8
+      'true': 8
       w: 12
       x: 0
-      y: 8
+      y: 0
     id: 9
     options:
       legend:
@@ -164,10 +113,44 @@ panels:
       type: loki
       uid: ${loki_datasource}
     gridPos:
+      h: 8
+      w: 12
+      x: 12
+      y: 0
+    id: 12
+    options:
+      dedupStrategy: none
+      enableLogDetails: true
+      prettifyLogMessage: false
+      showCommonLabels: false
+      showLabels: false
+      showTime: false
+      sortOrder: Descending
+      wrapLogMessage: false
+    pluginVersion: 9.4.3
+    targets:
+      - datasource:
+          type: loki
+          uid: ${loki_datasource}
+        editorMode: code
+        expr: '{job="varstarlogs", filename="/var/log/fail2ban/fail2ban.log"} != `Ignore`
+          != `fail2ban.actions` != `fail2ban.filter` != `Please check jail has possibly`
+          != `Unban` |= `Ban` |= ip(`0.0.0.0/0`) | regexp `(?P<date>.*?) (?P<time>.*?),.*?\[(?P<jail>.*?)\]
+          (?P<action>.*?) (?P<ip>\d+\.\d+\.\d+\.\d+)$`| line_format "[{{.date}} {{.time}}]
+          {{.ip}} {{.action}} ({{.jail}})"'
+        queryType: range
+        refId: A
+    title: Fail2Ban Activity
+    type: logs
+  - datasource:
+      type: loki
+      uid: ${loki_datasource}
+    gridPos:
       h: 9
+      'true': 16
       w: 17
       x: 0
-      y: 16
+      y: 8
     id: 2
     options:
       dedupStrategy: none
@@ -205,7 +188,6 @@ panels:
           mode: absolute
           steps:
             - color: green
-              value: null
             - color: '#EAB839'
               value: 2
             - color: red
@@ -213,9 +195,10 @@ panels:
       overrides: []
     gridPos:
       h: 8
+      'true': 25
       w: 12
       x: 0
-      y: 25
+      y: 17
     id: 10
     options:
       displayMode: gradient
@@ -229,7 +212,7 @@ panels:
         values: false
       showUnfilled: true
       text: {}
-    pluginVersion: 9.2.5
+    pluginVersion: 9.4.3
     targets:
       - datasource:
           type: loki
@@ -242,7 +225,62 @@ panels:
         refId: A
     title: Non-local Useragents
     type: bargauge
-refresh: false
+  - datasource:
+      type: loki
+      uid: ${loki_datasource}
+    fieldConfig:
+      defaults:
+        color:
+          mode: thresholds
+        links:
+          - targetBlank: true
+            title: IP Address Detail
+            url: https://grafana.home.lan/explore?orgId&left={"datasource":"Loki","queries":[{"refId":"A","expr":"{filename%3D\"%2Fvar%2Flog%2Fnginx%2Faccess.log\",job=\"varstarlogs\"}
+              != \"Loki\" |= ip(\"$${__field.labels.client}\")"}],"range":{"from":"$${__from}","to":"$${__to}"}}
+        mappings: []
+        thresholds:
+          mode: absolute
+          steps:
+            - color: green
+            - color: '#EAB839'
+              value: 2
+            - color: red
+              value: 5
+      overrides: []
+    gridPos:
+      h: 8
+      'true': 0
+      w: 12
+      x: 12
+      y: 17
+    id: 7
+    options:
+      displayMode: gradient
+      minVizHeight: 10
+      minVizWidth: 0
+      orientation: horizontal
+      reduceOptions:
+        calcs:
+          - max
+        fields: ''
+        values: false
+      showUnfilled: true
+      text: {}
+    pluginVersion: 9.4.3
+    targets:
+      - datasource:
+          type: loki
+          uid: ${loki_datasource}
+        expr: sum by (client) (count_over_time({filename="/var/log/nginx/access.log"}
+          != ip("192.168.1.1/16") != ip("127.0.0.1") != "SYSTEM" | pattern `<client>
+          - <_> <_> "<request>" <code> <size> "-" "<user_agent>" "-"`[5m]))
+        legendFormat: '{{client}}'
+        refId: A
+    title: Query Access from non-local
+    type: bargauge
+refresh: ''
+revision: 1
+schemaVersion: 38
 style: dark
 tags: []
 templating:
@@ -253,4 +291,6 @@ time:
 timepicker: {}
 timezone: ''
 title: Synology Nginx Logs
+uid: Z5sbkF8nk
+version: 40
 weekStart: ''
