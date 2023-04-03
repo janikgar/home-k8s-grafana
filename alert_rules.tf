@@ -18,12 +18,9 @@ resource "grafana_rule_group" "swap" {
       "severity" = "warning"
     }
     annotations = {
-      "description" = <<EOF
-        High Swap on {{ slice $labels.instance 0 13 }}
-        EOF
-      "summary"     = <<EOF
-        Swap usage is high on {{ slice $labels.instance 0 13 }} and needs should be cleared to reduce CPU load from high IOWait
-        EOF
+      "description" = "High Swap on {{ slice $labels.instance 0 13 }}"
+      "summary"     = "Swap usage is high on {{ slice $labels.instance 0 13 }} and needs should be cleared to reduce CPU load from high IOWait"
+      "hostname" = "{{ slice $labels.instance 0 13 }}"
     }
     data {
       ref_id         = "A"
