@@ -106,7 +106,7 @@ panels:
       shared: true
       sort: 0
       value_type: individual
-    type: graph
+    type: timeseries
     xaxis:
       mode: time
       show: true
@@ -117,10 +117,6 @@ panels:
         logBase: 1
         min: '0'
         show: true
-      - $$hashKey: object:179
-        format: short
-        logBase: 1
-        show: false
     yaxis:
       align: false
   - datasource:
@@ -405,7 +401,7 @@ panels:
       shared: true
       sort: 0
       value_type: individual
-    type: graph
+    type: timeseries
     xaxis:
       mode: time
       show: true
@@ -419,6 +415,75 @@ panels:
       - $$hashKey: object:319
         format: short
         logBase: 1
+        show: true
+    yaxis:
+      align: false
+  - aliasColors: {}
+    bars: false
+    dashLength: 10
+    dashes: false
+    datasource:
+      type: prometheus
+      uid: ${main_datasource}
+    decimals: 1
+    fill: 1
+    fillGradient: 0
+    gridPos:
+      h: 7
+      w: 24
+      x: 0
+      y: 27
+    hiddenSeries: false
+    id: 5
+    legend:
+      alignAsTable: true
+      avg: true
+      current: true
+      max: true
+      min: true
+      rightSide: true
+      show: true
+      total: false
+      values: true
+    lines: true
+    linewidth: 1
+    nullPointMode: 'null'
+    options:
+      alertThreshold: true
+    percentage: false
+    pluginVersion: 8.2.5
+    pointradius: 2
+    points: false
+    renderer: flot
+    seriesOverrides: []
+    spaceLength: 10
+    stack: false
+    steppedLine: false
+    targets:
+      - datasource:
+          type: prometheus
+          uid: ${main_datasource}
+        expr: (avg by (instance) (node_thermal_zone_temp{job="k8s_node",zone="0"})*9/5)+32
+        interval: ''
+        legendFormat: '{{instance}}'
+        refId: A
+    thresholds: []
+    timeRegions: []
+    title: Temperature
+    tooltip:
+      shared: true
+      sort: 0
+      value_type: individual
+    type: timeseries
+    xaxis:
+      mode: time
+      show: true
+      values: []
+    yaxes:
+      - $$hashKey: object:321
+        format: short
+        logBase: 1
+        min: '90'
         show: true
     yaxis:
       align: false

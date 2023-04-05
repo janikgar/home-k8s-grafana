@@ -115,7 +115,7 @@ panels:
           shared: true
           sort: 0
           value_type: cumulative
-        type: graph
+        type: timeseries
         xaxis:
           mode: time
           show: true
@@ -178,7 +178,7 @@ panels:
               value: 65
             - color: rgba(245, 54, 54, 0.9)
               value: 90
-        unit: percent
+        unit: percentage
       overrides: []
     gridPos:
       h: 5
@@ -238,7 +238,7 @@ panels:
               value: 65
             - color: rgba(245, 54, 54, 0.9)
               value: 90
-        unit: percent
+        unit: percentage
       overrides: []
     gridPos:
       h: 5
@@ -299,7 +299,7 @@ panels:
               value: 65
             - color: rgba(245, 54, 54, 0.9)
               value: 90
-        unit: percent
+        unit: percentage
       overrides: []
     gridPos:
       h: 5
@@ -754,7 +754,7 @@ panels:
       shared: true
       sort: 2
       value_type: cumulative
-    type: graph
+    type: timeseries
     xaxis:
       mode: time
       show: true
@@ -858,7 +858,7 @@ panels:
       shared: true
       sort: 2
       value_type: cumulative
-    type: graph
+    type: timeseries
     xaxis:
       mode: time
       show: true
@@ -988,7 +988,7 @@ panels:
       shared: true
       sort: 2
       value_type: cumulative
-    type: graph
+    type: timeseries
     xaxis:
       mode: time
       show: true
@@ -1091,7 +1091,7 @@ panels:
       shared: true
       sort: 2
       value_type: cumulative
-    type: graph
+    type: timeseries
     xaxis:
       mode: time
       show: true
@@ -1193,7 +1193,7 @@ panels:
       shared: true
       sort: 2
       value_type: cumulative
-    type: graph
+    type: timeseries
     xaxis:
       mode: time
       show: true
@@ -1294,7 +1294,7 @@ panels:
       shared: true
       sort: 2
       value_type: cumulative
-    type: graph
+    type: timeseries
     xaxis:
       mode: time
       show: true
@@ -1420,7 +1420,7 @@ panels:
       shared: true
       sort: 2
       value_type: cumulative
-    type: graph
+    type: timeseries
     xaxis:
       mode: time
       show: true
@@ -1521,7 +1521,7 @@ panels:
       shared: true
       sort: 2
       value_type: cumulative
-    type: graph
+    type: timeseries
     xaxis:
       mode: time
       show: true
@@ -1637,7 +1637,7 @@ panels:
       shared: true
       sort: 2
       value_type: cumulative
-    type: graph
+    type: timeseries
     xaxis:
       mode: time
       show: true
@@ -1807,7 +1807,7 @@ panels:
       shared: true
       sort: 2
       value_type: cumulative
-    type: graph
+    type: timeseries
     xaxis:
       mode: time
       show: true
@@ -1919,7 +1919,7 @@ panels:
       shared: true
       sort: 2
       value_type: cumulative
-    type: graph
+    type: timeseries
     xaxis:
       mode: time
       show: true
