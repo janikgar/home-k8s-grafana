@@ -20,7 +20,7 @@ resource "grafana_rule_group" "swap" {
     annotations = {
       "description" = "High Swap on {{ slice $labels.instance 0 13 }}"
       "summary"     = "Swap usage is high on {{ slice $labels.instance 0 13 }} and needs should be cleared to reduce CPU load from high IOWait"
-      "hostname" = "{{ slice $labels.instance 0 13 }}"
+      "hostname"    = "{{ slice $labels.instance 0 13 }}"
     }
     data {
       ref_id         = "A"
@@ -103,7 +103,7 @@ resource "grafana_rule_group" "swap" {
         conditions = [
           {
             evaluator = {
-              params = [0.2]
+              params = [0.5]
               type   = "gt"
             }
           }

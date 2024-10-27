@@ -9,7 +9,7 @@ resource "grafana_data_source" "prometheus" {
 resource "grafana_data_source" "k8s_prom" {
   name = "K8s-Prom"
   type = "prometheus"
-  url  = "https://prometheus.home.lan"
+  url  = "https://prom.home.lan"
 
   json_data_encoded = jsonencode({
     httpMethod    = "POST"

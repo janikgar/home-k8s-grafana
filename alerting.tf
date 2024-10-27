@@ -32,7 +32,7 @@ resource "grafana_contact_point" "n8n_synapse" {
 }
 
 resource "grafana_notification_policy" "root" {
-  group_by      = ["alert"]
+  group_by = ["alert"]
   # contact_point = grafana_contact_point.hass.name
   contact_point = grafana_contact_point.n8n_synapse.name
 
